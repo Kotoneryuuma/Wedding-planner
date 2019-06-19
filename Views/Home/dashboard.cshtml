@@ -1,0 +1,42 @@
+@using wedding.Models
+@model List<Display>
+
+
+<h3>Welcome to the Wedding Plannner</h3>
+
+
+
+<table>
+	<thead>
+		<th>Wedding</th>
+		<th>Date</th>
+		<th>Guest</th>
+        <th>Action</th>
+	</thead>
+	@foreach (Display i in Model)
+	{
+		<tr>
+			<td><a href="/wedding/@i.DisplayID">@i.Couple</td>
+			<td>@i.Date</td>
+			<td>@i.Guests.Count()</td>
+            <td>
+                @if (i.IsHosting)
+                {
+                <a href="/delete/@i.DisplayID">Delete</a>
+                }
+                else if (!i.IsAttending)
+                {
+                <a href="/join/@i.DisplayID">RSVP</a>
+                }
+                else
+                {
+                <a href="/leave/@i.DisplayID">Un-RSVP</a>
+                }
+            <td>
+
+		</tr>
+	}
+</table>
+
+<p><a href="/newwedding">New Wedding</a></p>
+
